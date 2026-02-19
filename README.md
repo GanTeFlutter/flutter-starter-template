@@ -87,4 +87,4 @@ Some architectural patterns and utilities were referenced from [hatayi-yasat](ht
 ## License
 
 Feel free to use this template for your own projects.
-# flutter-starter-template
+

@@ -1,5 +1,9 @@
 import 'package:akillisletme/product/const/app_paddings.dart';
+import 'package:akillisletme/product/init/language/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+
+part 'widget/language_switch.dart';
 
 /// Onboarding Step 1
 class Step1 extends StatelessWidget {
@@ -14,19 +18,18 @@ class Step1 extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Spacer(),
               Text(
-                'Step 1',
+                LocaleKeys.onboarding_step1Title.tr(),
                 style: Theme.of(context).textTheme.headlineMedium,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 8, width: double.infinity),
               Text(
-                'Buraya icerik ekleyin',
+                LocaleKeys.onboarding_step1Desc.tr(),
                 style: Theme.of(context).textTheme.bodyMedium,
                 textAlign: TextAlign.center,
               ),
-              const Spacer(),
+              const LanguageSwitch(),
               const SizedBox(height: 80),
             ],
           ),

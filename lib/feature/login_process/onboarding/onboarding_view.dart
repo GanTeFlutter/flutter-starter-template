@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:akillisletme/feature/login_process/onboarding/cubit/onboarding_cubit.dart';
 import 'package:akillisletme/feature/login_process/onboarding/onboarding_view_model.dart';
 import 'package:akillisletme/feature/login_process/onboarding/steps/step1/step_1.dart';
@@ -6,8 +8,11 @@ import 'package:akillisletme/feature/login_process/onboarding/steps/step3/step_3
 import 'package:akillisletme/feature/login_process/onboarding/steps/step4/step_4.dart';
 import 'package:akillisletme/feature/login_process/onboarding/steps/step_5.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+part 'widget/onboarding_nav_button.dart';
 
 /// Onboarding akisi — 5 adimlik PageView.
 class OnboardingView extends StatefulWidget {
@@ -66,14 +71,9 @@ class _BottomNavigation extends StatelessWidget {
               children: [
                 // Sol ok
                 if (!isFirstPage)
-                  IconButton.filled(
+                  OnboardingNavButton(
+                    icon: Icons.arrow_back,
                     onPressed: cubit.previousPage,
-                    icon: Icon(Icons.arrow_back, color: dotColor),
-                    iconSize: 24,
-                    style: IconButton.styleFrom(
-                      backgroundColor: dotColor.withValues(alpha: 0.1),
-                      padding: const EdgeInsets.all(16),
-                    ),
                   )
                 else
                   const SizedBox(width: 56),
@@ -92,18 +92,12 @@ class _BottomNavigation extends StatelessWidget {
                 ),
 
                 // Sag ok
-                IconButton.filled(
+                OnboardingNavButton(
+                  icon: Icons.arrow_forward,
+                  isAccent: isLastPage,
                   onPressed: isLastPage
                       ? () => cubit.completeOnboarding(context)
                       : cubit.nextPage,
-                  icon: Icon(Icons.arrow_forward, color: cs.onPrimary),
-                  iconSize: 24,
-                  style: IconButton.styleFrom(
-                    backgroundColor: isLastPage
-                        ? cs.primary
-                        : dotColor.withValues(alpha: 0.1),
-                    padding: const EdgeInsets.all(16),
-                  ),
                 ),
               ],
             ),

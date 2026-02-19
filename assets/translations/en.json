@@ -21,5 +21,17 @@
     "appearance": "Appearance",
     "theme": "Theme",
     "language": "Language"
+  },
+  "onboarding": {
+    "step1Title": "Step 1",
+    "step1Desc": "Add your content here",
+    "step2Title": "Step 2",
+    "step2Desc": "Add your content here",
+    "step3Title": "Step 3",
+    "step3Desc": "Add your content here",
+    "step4Title": "Step 4",
+    "step4Desc": "Add your content here",
+    "step5Title": "Step 5",
+    "step5Desc": "Add your content here"
   }
 }

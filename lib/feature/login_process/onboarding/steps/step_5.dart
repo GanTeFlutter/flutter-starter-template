@@ -1,4 +1,6 @@
 import 'package:akillisletme/product/const/app_paddings.dart';
+import 'package:akillisletme/product/init/language/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 /// Onboarding Step 5 - Son adim
@@ -16,13 +18,13 @@ class Step5 extends StatelessWidget {
             children: [
               const Spacer(),
               Text(
-                'Step 5',
+                LocaleKeys.onboarding_step5Title.tr(),
                 style: Theme.of(context).textTheme.headlineMedium,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 8, width: double.infinity),
               Text(
-                'Buraya icerik ekleyin',
+                LocaleKeys.onboarding_step5Desc.tr(),
                 style: Theme.of(context).textTheme.bodyMedium,
                 textAlign: TextAlign.center,
               ),

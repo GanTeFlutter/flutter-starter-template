@@ -1,0 +1,25 @@
+{
+  "general": {
+    "appName": "Flutter Başlangıç Şablonu",
+    "loading": "Yükleniyor...",
+    "retry": "Tekrar Dene"
+  },
+  "error": {
+    "title": "Bir Hata Oluştu"
+  },
+  "update": {
+    "required": "Güncelleme Gerekli",
+    "message": "Uygulamayı kullanmaya devam edebilmek için lütfen en son sürüme güncelleyin.",
+    "button": "Güncelle"
+  },
+  "home": {
+    "title": "Ana Sayfa",
+    "settings": "Ayarlar"
+  },
+  "settings": {
+    "title": "Ayarlar",
+    "appearance": "Görünüm",
+    "theme": "Tema",
+    "language": "Dil"
+  }
+}

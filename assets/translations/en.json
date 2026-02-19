@@ -1,0 +1,25 @@
+{
+  "general": {
+    "appName": "Flutter Starter Template",
+    "loading": "Loading...",
+    "retry": "Retry"
+  },
+  "error": {
+    "title": "An Error Occurred"
+  },
+  "update": {
+    "required": "Update Required",
+    "message": "Please update to the latest version to continue using the app.",
+    "button": "Update"
+  },
+  "home": {
+    "title": "Home",
+    "settings": "Settings"
+  },
+  "settings": {
+    "title": "Settings",
+    "appearance": "Appearance",
+    "theme": "Theme",
+    "language": "Language"
+  }
+}

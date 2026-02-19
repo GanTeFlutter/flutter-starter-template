@@ -20,6 +20,16 @@ A ready-to-use Flutter boilerplate that I use as the foundation for every new pr
 
 **Documentation** — The `doc/new_feature/` directory is a built-in developer guide. It contains modular docs for every common task: creating a feature folder, adding models, services, state management, views, routes, assets, caching, and more. Each file is self-contained — read only the one you need. There's also a checklist to make sure nothing is missed when adding a new feature. See [`doc/new_feature/README.md`](doc/new_feature/README.md) for the full navigation table.
 
+## Screenshots
+
+<p align="center">
+  <img src="app_image/onboarding.png" width="180" />
+  <img src="app_image/step5.png" width="180" />
+  <img src="app_image/home_0.png" width="180" />
+  <img src="app_image/home_1.png" width="180" />
+  <img src="app_image/settings.png" width="180" />
+</p>
+
 ## Tech Stack
 
 | Category | Package |

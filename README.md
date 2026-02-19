@@ -92,7 +92,7 @@ flutter run
 
 ## Credits
 
-Some architectural patterns and utilities were referenced from [hatayi-yasat](https://github.com/Jeiji7/hatayi-yasat), a production Flutter project.
+Some architectural patterns and utilities were referenced from [hatayi-yasat](https://github.com/VB-CORE/hatayi_yasat), a production Flutter project.
 
 ## License
 

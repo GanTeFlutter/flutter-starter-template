@@ -28,6 +28,7 @@ A ready-to-use Flutter boilerplate that I use as the foundation for every new pr
   <img src="app_image/home_0.png" width="180" />
   <img src="app_image/home_1.png" width="180" />
   <img src="app_image/settings.png" width="180" />
+  <img src="app_image/about.png" width="180" />
 </p>
 
 ## Tech Stack

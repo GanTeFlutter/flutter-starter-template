@@ -20,7 +20,21 @@
     "title": "Ayarlar",
     "appearance": "Görünüm",
     "theme": "Tema",
-    "language": "Dil"
+    "language": "Dil",
+    "support": "Destek",
+    "contactUs": "Bize Ulaşın",
+    "rateApp": "Uygulamayı Puanla",
+    "aboutTitle": "Hakkında",
+    "about": "Hakkında",
+    "legalAndPolicies": "Yasal & Politikalar",
+    "privacyPolicy": "Gizlilik Politikası",
+    "termsOfService": "Kullanım Koşulları",
+    "kvkkClarification": "KVKK Aydınlatma Metni",
+    "consentDeclaration": "Açık Rıza Beyanı",
+    "acceptableUsePolicy": "Kabul Edilebilir Kullanım Politikası",
+    "refundPolicy": "İade Politikası",
+    "copyrightNotice": "Telif Hakkı Bildirimi",
+    "version": "Sürüm"
   },
   "onboarding": {
     "step1Title": "Adım 1",

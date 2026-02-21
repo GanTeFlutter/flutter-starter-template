@@ -1,3 +1,4 @@
+import 'package:akillisletme/feature/about/about_view.dart';
 import 'package:akillisletme/feature/home/home_view.dart';
 import 'package:akillisletme/feature/login_process/onboarding/onboarding_view.dart';
 import 'package:akillisletme/feature/settings/settings_view.dart';
@@ -11,7 +12,12 @@ part 'app_router.g.dart';
 @TypedGoRoute<HomeRoute>(
   path: '/',
   routes: [
-    TypedGoRoute<SettingsRoute>(path: 'settings'),
+    TypedGoRoute<SettingsRoute>(
+      path: 'settings',
+      routes: [
+        TypedGoRoute<AboutRoute>(path: 'about'),
+      ],
+    ),
   ],
 )
 class HomeRoute extends GoRouteData with $HomeRoute {
@@ -31,6 +37,18 @@ class SettingsRoute extends GoRouteData with $SettingsRoute {
     return slideRightTransition(
       key: state.pageKey,
       child: const SettingsView(),
+    );
+  }
+}
+
+class AboutRoute extends GoRouteData with $AboutRoute {
+  const AboutRoute();
+
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) {
+    return slideRightTransition(
+      key: state.pageKey,
+      child: const AboutView(),
     );
   }
 }

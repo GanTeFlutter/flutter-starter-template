@@ -1,7 +1,7 @@
 name: akillisletme
 description: "A new Flutter project."
 publish_to: 'none' 
-version: 1.0.0+1
+version: 1.0.1+2
 
 environment:
   sdk: ^3.10.7
@@ -39,6 +39,9 @@ dependencies:
   shimmer: ^3.0.0
   smooth_page_indicator: ^1.2.1
   vector_graphics: ^1.1.15
+
+  # Permission
+  permission_handler: ^11.3.1
 
   # Utility
   audioplayers: ^6.5.1

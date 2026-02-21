@@ -20,7 +20,21 @@
     "title": "Settings",
     "appearance": "Appearance",
     "theme": "Theme",
-    "language": "Language"
+    "language": "Language",
+    "support": "Support",
+    "contactUs": "Contact Us",
+    "rateApp": "Rate App",
+    "aboutTitle": "About",
+    "about": "About",
+    "legalAndPolicies": "Legal & Policies",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service",
+    "kvkkClarification": "KVKK Clarification Text",
+    "consentDeclaration": "Consent Declaration",
+    "acceptableUsePolicy": "Acceptable Use Policy",
+    "refundPolicy": "Refund Policy",
+    "copyrightNotice": "Copyright Notice",
+    "version": "Version"
   },
   "onboarding": {
     "step1Title": "Step 1",

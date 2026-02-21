@@ -1,4 +1,7 @@
+import 'package:akillisletme/feature/settings/widget/about_tile.dart';
+import 'package:akillisletme/feature/settings/widget/contact_us_tile.dart';
 import 'package:akillisletme/feature/settings/widget/language_tile.dart';
+import 'package:akillisletme/feature/settings/widget/rate_app_tile.dart';
 import 'package:akillisletme/feature/settings/widget/settings_section.dart';
 import 'package:akillisletme/feature/settings/widget/theme_tile.dart';
 import 'package:akillisletme/product/init/language/locale_keys.g.dart';
@@ -26,6 +29,21 @@ class SettingsView extends StatelessWidget {
             children: const [
               ThemeTile(),
               LanguageTile(),
+            ],
+          ),
+          SizedBox(height: context.r(16)),
+          SettingsSection(
+            title: LocaleKeys.settings_support.tr(),
+            children: const [
+              ContactUsTile(),
+              RateAppTile(),
+            ],
+          ),
+          SizedBox(height: context.r(16)),
+          SettingsSection(
+            title: LocaleKeys.settings_aboutTitle.tr(),
+            children: const [
+              AboutTile(),
             ],
           ),
         ],

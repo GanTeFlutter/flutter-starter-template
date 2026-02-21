@@ -103,3 +103,5 @@ class SomeService {
 | SharedCache | Basit key-value cache | `locator.sharedCache` |
 | ProductCache | Hive model cache | `locator.productCache` |
 | RemoteConfigService | Firebase Remote Config | `locator.remoteConfigService` |
+| UrlLauncherService | URL açma / mail gönderme | `locator.urlLauncher` |
+| PermissionService | İzin yönetimi (permission_handler) | `locator.permission` |

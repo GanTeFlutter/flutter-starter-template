@@ -25,6 +25,7 @@ Reference implementation: `lib/feature/<any_existing_feature>/`
 | Showing SnackBar, Dialog, BottomSheet | [widget_and_theme.md](widget_and_theme.md) (`AppMessenger`) |
 | Adding a route or UI string | [route_and_strings.md](route_and_strings.md) |
 | Adding an asset (image, SVG, Lottie) | [assets_and_flutter_gen.md](assets_and_flutter_gen.md) |
+| Updating settings URLs / contact info | [settings_and_urls.md](settings_and_urls.md) |
 
 ---
 

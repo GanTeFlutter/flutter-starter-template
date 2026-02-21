@@ -31,6 +31,7 @@ A ready-to-use Flutter boilerplate that I use as the foundation for every new pr
   <img src="app_image/about.png" width="180" />
 </p>
 
+
 ## Tech Stack
 
 | Category | Package |

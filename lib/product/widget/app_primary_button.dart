@@ -1,5 +1,4 @@
 import 'package:akillisletme/product/utils/button_feedback.dart';
-import 'package:akillisletme/product/utils/responsive_extension.dart';
 import 'package:flutter/material.dart';
 
 
@@ -30,13 +29,13 @@ class AppPrimaryButton extends StatelessWidget {
     final button = icon != null
         ? FilledButton.icon(
             onPressed: _wrappedOnPressed,
-            icon: Icon(icon, size: context.r(20)),
+            icon: Icon(icon, size: 20),
             label: _label(context),
-            style: _style(context),
+            style: _style(),
           )
         : FilledButton(
             onPressed: _wrappedOnPressed,
-            style: _style(context),
+            style: _style(),
             child: _label(context),
           );
 
@@ -47,18 +46,17 @@ class AppPrimaryButton extends StatelessWidget {
   Widget _label(BuildContext context) {
     return Text(
       label,
-      style: TextStyle(
-        fontSize: context.rf(16),
-        fontWeight: FontWeight.w700,
-      ),
+      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+            fontWeight: FontWeight.w700,
+          ),
     );
   }
 
-  ButtonStyle _style(BuildContext context) {
+  ButtonStyle _style() {
     return FilledButton.styleFrom(
-      padding: EdgeInsets.symmetric(vertical: context.r(16)),
+      padding: const EdgeInsets.symmetric(vertical: 16),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(context.r(14)),
+        borderRadius: BorderRadius.circular(14),
       ),
     );
   }

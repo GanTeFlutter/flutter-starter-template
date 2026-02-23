@@ -15,5 +15,5 @@ ThemeData _buildDarkTheme(ColorScheme cs) => ThemeData(
       chipTheme: _buildChipTheme(cs),
       sliderTheme: _buildSliderTheme(cs),
       dialogTheme: _dialogTheme,
-      extensions: const [AppThemeColors.appColors],
+      extensions: const [AppThemeColors.dark],
     );

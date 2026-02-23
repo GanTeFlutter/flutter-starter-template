@@ -1,4 +1,3 @@
-import 'package:akillisletme/product/utils/responsive_extension.dart';
 import 'package:flutter/material.dart';
 
 /// Ayarlar sayfasindaki gruplar icin seffaf kart.
@@ -22,23 +21,19 @@ class SettingsSection extends StatelessWidget {
       children: [
         if (title != null)
           Padding(
-            padding: EdgeInsets.only(
-              left: context.r(16),
-              bottom: context.r(8),
-            ),
+            padding: const EdgeInsets.only(left: 16, bottom: 8),
             child: Text(
               title!,
-              style: TextStyle(
-                fontSize: context.rf(13),
-                fontWeight: FontWeight.w600,
-                color: cs.onSurfaceVariant,
-              ),
+              style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: cs.onSurfaceVariant,
+                  ),
             ),
           ),
         DecoratedBox(
           decoration: BoxDecoration(
             color: cs.surfaceContainerHighest.withValues(alpha: 0.4),
-            borderRadius: BorderRadius.circular(context.r(16)),
+            borderRadius: BorderRadius.circular(16),
             border: Border.all(
               color: cs.outlineVariant.withValues(alpha: 0.2),
             ),

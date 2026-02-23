@@ -1,5 +1,4 @@
 import 'package:akillisletme/product/utils/button_feedback.dart';
-import 'package:akillisletme/product/utils/responsive_extension.dart';
 import 'package:flutter/material.dart';
 
 
@@ -29,10 +28,9 @@ class AppTextButton extends StatelessWidget {
       onPressed: _wrappedOnPressed,
       child: Text(
         label,
-        style: TextStyle(
-          color: color,
-          fontSize: context.rf(14),
-        ),
+        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: color,
+            ),
       ),
     );
   }

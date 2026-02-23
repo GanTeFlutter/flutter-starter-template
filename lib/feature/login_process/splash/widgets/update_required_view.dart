@@ -34,30 +34,26 @@ class _UpdateRequiredView extends StatelessWidget {
             const SizedBox(height: 32),
             Text(
               LocaleKeys.update_required.tr(),
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: cs.onSurface,
-              ),
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: cs.onSurface,
+                  ),
             ),
             const SizedBox(height: 12),
             Text(
               LocaleKeys.update_message.tr(),
               textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 15,
-                color: cs.onSurface.withValues(alpha: 0.6),
-                height: 1.5,
-              ),
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: cs.onSurface.withValues(alpha: 0.6),
+                  ),
             ),
             const SizedBox(height: 24),
             Text(
               'v$currentVersion → v$minimumVersion',
-              style: TextStyle(
-                fontSize: 14,
-                fontFamily: 'monospace',
-                color: cs.onSurface.withValues(alpha: 0.4),
-              ),
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    fontFamily: 'monospace',
+                    color: cs.onSurface.withValues(alpha: 0.4),
+                  ),
             ),
             const SizedBox(height: 40),
             AppPrimaryButton(

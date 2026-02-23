@@ -4,4 +4,5 @@ enum SharedKeys {
   themeVariant,
   currentVersion,
   onboardingCompleted,
+  backgroundAnimation,
 }

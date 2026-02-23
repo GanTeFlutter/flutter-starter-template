@@ -27,11 +27,12 @@ class StarterApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final variant = context.watch<ThemeCubit>().state;
+    final themeState = context.watch<ThemeCubit>().state;
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      darkTheme: AppTheme.darkTheme(variant),
-      theme: AppTheme.lightTheme(variant),
+      themeMode: themeState.themeMode,
+      darkTheme: AppTheme.darkTheme(themeState.variant),
+      theme: AppTheme.lightTheme(themeState.variant),
       routerConfig: AppRouter.router,
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,

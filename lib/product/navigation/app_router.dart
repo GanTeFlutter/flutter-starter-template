@@ -1,4 +1,4 @@
-import 'package:akillisletme/feature/about/about_view.dart';
+import 'package:akillisletme/feature/settings/about/about_view.dart';
 import 'package:akillisletme/feature/home/home_view.dart';
 import 'package:akillisletme/feature/login_process/onboarding/onboarding_view.dart';
 import 'package:akillisletme/feature/settings/settings_view.dart';

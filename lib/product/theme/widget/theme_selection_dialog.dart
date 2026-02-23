@@ -1,6 +1,8 @@
+import 'package:akillisletme/product/init/language/locale_keys.g.dart';
 import 'package:akillisletme/product/theme/app_theme_variant.dart';
 import 'package:akillisletme/product/theme/state/theme_cubit.dart';
-import 'package:akillisletme/product/utils/responsive_extension.dart';
+import 'package:akillisletme/product/theme/state/theme_state.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,34 +21,92 @@ class ThemeSelectionDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final current = context.watch<ThemeCubit>().state;
-    return AlertDialog(
-      title: Text('Choose Theme', style: TextStyle(fontSize: context.rf(22))),
-      content: SizedBox(
-        width: double.maxFinite,
-        child: GridView.builder(
-          shrinkWrap: true,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-            mainAxisSpacing: context.r(12),
-            crossAxisSpacing: context.r(12),
-            childAspectRatio: 0.85,
+    final cs = Theme.of(context).colorScheme;
+    return BlocBuilder<ThemeCubit, ThemeState>(
+      builder: (context, state) {
+        return AlertDialog(
+          title: Text(
+            LocaleKeys.settings_chooseTheme.tr(),
+            style: Theme.of(context).textTheme.titleMedium,
           ),
-          itemCount: AppThemeVariant.values.length,
-          itemBuilder: (context, index) {
-            final variant = AppThemeVariant.values[index];
-            final isSelected = variant == current;
-            return _VariantCard(
-              variant: variant,
-              isSelected: isSelected,
-              onTap: () {
-                context.read<ThemeCubit>().setVariant(variant);
-                Navigator.of(context).pop();
-              },
-            );
-          },
+          contentPadding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _buildVariantGrid(context, state),
+              const SizedBox(height: 16),
+              _buildThemeModeSelector(context, state),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('OK', style: TextStyle(color: cs.primary)),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _buildVariantGrid(BuildContext context, ThemeState state) {
+    return Wrap(
+      spacing: 8,
+      runSpacing: 8,
+      children: AppThemeVariant.values.map((variant) {
+        final isSelected = variant == state.variant;
+        return _VariantCard(
+          variant: variant,
+          isSelected: isSelected,
+          onTap: () => context.read<ThemeCubit>().setVariant(variant),
+        );
+      }).toList(),
+    );
+  }
+
+  Widget _buildThemeModeSelector(BuildContext context, ThemeState state) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          LocaleKeys.settings_themeMode.tr(),
+          style: Theme.of(context).textTheme.titleSmall,
         ),
-      ),
+        const SizedBox(height: 8),
+        SizedBox(
+          width: double.maxFinite,
+          child: SegmentedButton<ThemeMode>(
+            showSelectedIcon: false,
+            segments: [
+              ButtonSegment(
+                value: ThemeMode.system,
+                label: Text(
+                  LocaleKeys.settings_themeModeSystem.tr(),
+                  style: Theme.of(context).textTheme.labelMedium,
+                ),
+              ),
+              ButtonSegment(
+                value: ThemeMode.light,
+                label: Text(
+                  LocaleKeys.settings_themeModeLight.tr(),
+                  style: Theme.of(context).textTheme.labelMedium,
+                ),
+              ),
+              ButtonSegment(
+                value: ThemeMode.dark,
+                label: Text(
+                  LocaleKeys.settings_themeModeDark.tr(),
+                  style: Theme.of(context).textTheme.labelMedium,
+                ),
+              ),
+            ],
+            selected: {state.themeMode},
+            onSelectionChanged: (modes) {
+              context.read<ThemeCubit>().setThemeMode(modes.first);
+            },
+          ),
+        ),
+      ],
     );
   }
 }
@@ -67,46 +127,47 @@ class _VariantCard extends StatelessWidget {
       onTap: onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
+        width: 56,
+        padding: const EdgeInsets.symmetric(vertical: 6),
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.surfaceContainerHighest,
-          borderRadius: BorderRadius.circular(context.r(14)),
+          borderRadius: BorderRadius.circular(10),
           border: Border.all(
             color: isSelected ? variant.previewColor : Colors.transparent,
-            width: 2.5,
+            width: 2,
           ),
         ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
             Stack(
               alignment: Alignment.center,
               children: [
                 Container(
-                  width: context.r(44),
-                  height: context.r(44),
+                  width: 28,
+                  height: 28,
                   decoration: BoxDecoration(
                     color: variant.previewColor,
                     shape: BoxShape.circle,
                   ),
                 ),
                 if (isSelected)
-                  Icon(
+                  const Icon(
                     Icons.check_rounded,
                     color: Colors.white,
-                    size: context.r(24),
+                    size: 16,
                   ),
               ],
             ),
-            SizedBox(height: context.r(8)),
+            const SizedBox(height: 4),
             Text(
               variant.label,
-              style: TextStyle(
-                fontSize: context.rf(13),
-                fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
-                color: isSelected
-                    ? variant.previewColor
-                    : Theme.of(context).colorScheme.onSurface,
-              ),
+              style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                    fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
+                    color: isSelected
+                        ? variant.previewColor
+                        : Theme.of(context).colorScheme.onSurface,
+                  ),
             ),
           ],
         ),

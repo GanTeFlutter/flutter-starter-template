@@ -32,6 +32,24 @@ enum AppThemeVariant {
     label: 'Red',
     seedColor: Color(0xFFE91E63),
     previewColor: Color(0xFFE91E63),
+  ),
+  black(
+    key: 'black',
+    label: 'Black',
+    seedColor: Color(0xFF212121),
+    previewColor: Color(0xFF212121),
+  ),
+  teal(
+    key: 'teal',
+    label: 'Teal',
+    seedColor: Color(0xFF009688),
+    previewColor: Color(0xFF009688),
+  ),
+  indigo(
+    key: 'indigo',
+    label: 'Indigo',
+    seedColor: Color(0xFF3F51B5),
+    previewColor: Color(0xFF3F51B5),
   );
 
   const AppThemeVariant({

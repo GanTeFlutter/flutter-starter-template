@@ -11,7 +11,7 @@ class ThemeTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
-    final variant = context.watch<ThemeCubit>().state;
+    final variant = context.watch<ThemeCubit>().state.variant;
 
     return ListTile(
       leading: Icon(Icons.palette_rounded, color: cs.onSurfaceVariant),

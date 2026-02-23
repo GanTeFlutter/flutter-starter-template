@@ -21,7 +21,7 @@ class AppThemeColors extends ThemeExtension<AppThemeColors> {
   final Color toggleActive;
   final Color toggleInactive;
 
-  static const appColors = AppThemeColors(
+  static const light = AppThemeColors(
     scoreGold: Color(0xFFFFD700),
     scoreRed: Color(0xFFFF4757),
     scoreGreen: Color(0xFF2ED573),
@@ -29,6 +29,16 @@ class AppThemeColors extends ThemeExtension<AppThemeColors> {
     scorePink: Color(0xFFFF6B81),
     toggleActive: Color(0xFF2ED573),
     toggleInactive: Color(0xFFEF5350),
+  );
+
+  static const dark = AppThemeColors(
+    scoreGold: Color(0xFFFFE066),
+    scoreRed: Color(0xFFFF6B81),
+    scoreGreen: Color(0xFF7BED9F),
+    scoreBlue: Color(0xFF70A1FF),
+    scorePink: Color(0xFFFF8FA3),
+    toggleActive: Color(0xFF7BED9F),
+    toggleInactive: Color(0xFFFF8A80),
   );
 
   @override
@@ -63,4 +73,10 @@ class AppThemeColors extends ThemeExtension<AppThemeColors> {
       toggleInactive: Color.lerp(toggleInactive, other.toggleInactive, t)!,
     );
   }
+}
+
+/// `context.appColors.scoreGold` seklinde kisa erisim.
+extension AppThemeColorsExtension on BuildContext {
+  AppThemeColors get appColors =>
+      Theme.of(this).extension<AppThemeColors>()!;
 }

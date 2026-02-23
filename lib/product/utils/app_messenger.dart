@@ -1,4 +1,3 @@
-import 'package:akillisletme/product/utils/responsive_extension.dart';
 import 'package:flutter/material.dart';
 
 /// SnackBar ve BottomSheet icin BuildContext extension.
@@ -66,7 +65,7 @@ extension AppMessenger on BuildContext {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
-          margin: EdgeInsets.symmetric(horizontal: r(16), vertical: r(8)),
+          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           duration: const Duration(seconds: 3),
         ),
       );
@@ -121,8 +120,8 @@ extension AppMessenger on BuildContext {
       showDragHandle: showDragHandle,
       isScrollControlled: true,
       backgroundColor: cs.surface,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(r(20))),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (_) => SafeArea(child: child),
     );

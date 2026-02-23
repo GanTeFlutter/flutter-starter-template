@@ -1,9 +1,8 @@
-import 'package:akillisletme/feature/about/widget/about_link_tile.dart';
-import 'package:akillisletme/feature/about/widget/version_tile.dart';
+import 'package:akillisletme/feature/settings/about/widget/about_link_tile.dart';
+import 'package:akillisletme/feature/settings/about/widget/version_tile.dart';
 import 'package:akillisletme/feature/settings/widget/settings_section.dart';
 import 'package:akillisletme/product/const/app_string.dart';
 import 'package:akillisletme/product/init/language/locale_keys.g.dart';
-import 'package:akillisletme/product/utils/responsive_extension.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -17,10 +16,7 @@ class AboutView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text(LocaleKeys.settings_aboutTitle.tr())),
       body: ListView(
-        padding: EdgeInsets.symmetric(
-          horizontal: context.r(16),
-          vertical: context.r(8),
-        ),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         children: [
           SettingsSection(
             title: LocaleKeys.settings_legalAndPolicies.tr(),
@@ -62,7 +58,7 @@ class AboutView extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: context.r(16)),
+          const SizedBox(height: 16),
           const SettingsSection(
             children: [
               VersionTile(),

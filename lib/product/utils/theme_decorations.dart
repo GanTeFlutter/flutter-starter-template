@@ -1,4 +1,3 @@
-import 'package:akillisletme/product/utils/responsive_extension.dart';
 import 'package:flutter/material.dart';
 
 extension ThemeDecorations on BuildContext {
@@ -11,7 +10,7 @@ extension ThemeDecorations on BuildContext {
           cs.primary.withValues(alpha: 0.08),
         ],
       ),
-      borderRadius: BorderRadius.circular(r(20)),
+      borderRadius: BorderRadius.circular(20),
       border: Border.all(
         color: cs.outlineVariant.withValues(alpha: 0.2),
       ),

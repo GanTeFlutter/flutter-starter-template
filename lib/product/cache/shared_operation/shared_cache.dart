@@ -40,12 +40,25 @@ final class SharedCache {
     await _sharedOperation.setValue(SharedKeys.onboardingCompleted, value);
   }
 
+  // ── Background Animation ──────────────────────────────────
+  bool get isBackgroundAnimationEnabled =>
+      _sharedOperation.getValue<bool>(SharedKeys.backgroundAnimation) ?? true;
+
+  Future<void> setBackgroundAnimation({required bool enabled}) async {
+    await _sharedOperation.setValue(SharedKeys.backgroundAnimation, enabled);
+  }
+
   // ── Theme ──────────────────────────────────────────────────
-  ThemeMode get themeMode =>
-      ThemeMode.values[_sharedOperation.getValue<int>(SharedKeys.theme) ??
-          ThemeMode.light.index];
+  ThemeMode get themeMode {
+    final key = _sharedOperation.getValue<String>(SharedKeys.theme);
+    if (key == null) return ThemeMode.system;
+    return ThemeMode.values.firstWhere(
+      (m) => m.name == key,
+      orElse: () => ThemeMode.system,
+    );
+  }
 
   Future<void> setThemeMode(ThemeMode mode) async {
-    await _sharedOperation.setValue<int>(SharedKeys.theme, mode.index);
+    await _sharedOperation.setValue<String>(SharedKeys.theme, mode.name);
   }
 }

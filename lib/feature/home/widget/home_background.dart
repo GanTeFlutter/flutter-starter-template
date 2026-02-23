@@ -1,12 +1,15 @@
 import 'dart:math';
 
+import 'package:akillisletme/product/service/service_locator.dart';
 import 'package:flutter/material.dart';
 
 /// Arka plan animasyonu — yüzen "Flutter Starter Template" yazıları.
 class HomeBackground extends StatefulWidget {
   const HomeBackground({super.key});
 
-  static final enabledNotifier = ValueNotifier<bool>(true);
+  static final enabledNotifier = ValueNotifier<bool>(
+    locator.sharedCache.isBackgroundAnimationEnabled,
+  );
 
   @override
   State<HomeBackground> createState() => _HomeBackgroundState();

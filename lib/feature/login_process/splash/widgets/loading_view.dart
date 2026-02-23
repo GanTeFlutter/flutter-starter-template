@@ -13,7 +13,7 @@ class _LoadingView extends StatelessWidget {
           const SizedBox(height: 24),
           Text(
             LocaleKeys.general_loading.tr(),
-            style: const TextStyle(fontSize: 16),
+            style: Theme.of(context).textTheme.bodyLarge,
           ),
         ],
       ),

@@ -62,7 +62,7 @@ class _OnboardingNavButtonState extends State<OnboardingNavButton>
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
 
-    final iconColor = widget.isAccent ? cs.primary : Colors.white;
+    final iconColor = widget.isAccent ? cs.primary : cs.onSurface;
 
     return GestureDetector(
       onTapDown: _handleTapDown,
@@ -85,12 +85,12 @@ class _OnboardingNavButtonState extends State<OnboardingNavButton>
           decoration: BoxDecoration(
             color: widget.isAccent
                 ? cs.primary.withValues(alpha: 0.15)
-                : Colors.white.withValues(alpha: 0.15),
+                : cs.onSurface.withValues(alpha: 0.1),
             shape: BoxShape.circle,
             border: Border.all(
               color: widget.isAccent
                   ? cs.primary
-                  : Colors.white.withValues(alpha: 0.6),
+                  : cs.onSurface.withValues(alpha: 0.3),
             ),
           ),
           child: Icon(widget.icon, color: iconColor, size: 24),

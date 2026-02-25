@@ -13,7 +13,7 @@ class BackgroundAnimationTile extends StatelessWidget {
     return ValueListenableBuilder<bool>(
       valueListenable: HomeBackground.enabledNotifier,
       builder: (context, enabled, _) {
-        return SwitchListTile.adaptive(
+        return SwitchListTile(
           secondary: Icon(Icons.animation, color: cs.onSurfaceVariant),
           title: Text(LocaleKeys.settings_backgroundAnimation.tr()),
           value: enabled,

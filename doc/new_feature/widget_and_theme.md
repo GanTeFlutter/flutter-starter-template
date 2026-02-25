@@ -4,118 +4,118 @@
 
 1. **Check `product/widget/`.** Is there an existing shared widget used across the app?
 2. **If it exists, use it.** Do not create a new widget.
-3. **If it doesn't exist and will be used across the app** -> Add it under `lib/product/widget/`.
-4. **If it's a widget specific only to this feature** -> Add it under `lib/feature/<feature>/widget/`.
+3. **If it doesn't exist and will be used across the app** → Add it under `lib/product/widget/`.
+4. **If it's a widget specific only to this feature** → Add it under `lib/feature/<feature>/widget/`.
 
 ## Theme / Style
 
 1. **Check `product/theme/parts/`.** Button theme, card theme, etc. are already defined app-wide.
-   (Example: `button_theme.dart` -> Global styles for ElevatedButton, FilledButton)
-2. **If the global theme is sufficient** -> Do not add extra styles, the theme is applied automatically.
-3. **If a specific/different design is needed** -> Override the style in the feature's `widget/` folder.
+   (Example: `button_theme.dart` → Global styles for ElevatedButton, FilledButton)
+2. **If the global theme is sufficient** → Do not add extra styles, the theme is applied automatically.
+3. **If a specific/different design is needed** → Override the style in the feature's `widget/` folder.
 
-## TextTheme Kullanimi
+## TextTheme Usage
 
-Inline `TextStyle(fontSize: ...)` **kullanilmaz**. Tum metin stilleri `text_theme.dart`'ta tanimlidir ve `Theme.of(context).textTheme.*` ile erisilir.
+Inline `TextStyle(fontSize: ...)` is **not allowed**. All text styles are defined in `text_theme.dart` and accessed via `Theme.of(context).textTheme.*`.
 
 ```dart
-// Dogru — TextTheme'den al
-Text('Baslik', style: Theme.of(context).textTheme.headlineSmall)
+// Correct — get from TextTheme
+Text('Title', style: Theme.of(context).textTheme.headlineSmall)
 
-// Ozellestirme gerekiyorsa copyWith kullan
+// If customization is needed, use copyWith
 Text(
-  'Baslik',
+  'Title',
   style: Theme.of(context).textTheme.titleLarge?.copyWith(
     fontWeight: FontWeight.bold,
     color: cs.onSurface,
   ),
 )
 
-// Yanlis — inline fontSize kullanma
-Text('Baslik', style: TextStyle(fontSize: 24))
+// Wrong — do not use inline fontSize
+Text('Title', style: TextStyle(fontSize: 24))
 ```
 
-### Sik kullanilan TextTheme stilleri
+### Common TextTheme styles
 
-| Stil | Boyut | Kullanim |
-|------|-------|----------|
-| `headlineSmall` | 24 | Sayfa/dialog buyuk basliklar |
-| `titleLarge` | 22 | Kart/tile basliklari |
-| `titleMedium` | 16 | Buton label'lari, dialog basliklari |
-| `titleSmall` | 14 | Kucuk basliklar |
-| `labelMedium` | 12 | Section basliklari, segment label'lari |
-| `labelSmall` | 11 | Chip/badge metinleri |
-| `bodyLarge` | 16 | Ana icerik metni |
-| `bodyMedium` | 14 | Genel metin, aciklama |
-| `bodySmall` | 12 | Yardimci metin, alt bilgi |
+| Style | Size | Usage |
+|-------|------|-------|
+| `headlineSmall` | 24 | Page/dialog large titles |
+| `titleLarge` | 22 | Card/tile titles |
+| `titleMedium` | 16 | Button labels, dialog titles |
+| `titleSmall` | 14 | Small titles |
+| `labelMedium` | 12 | Section titles, segment labels |
+| `labelSmall` | 11 | Chip/badge text |
+| `bodyLarge` | 16 | Main content text |
+| `bodyMedium` | 14 | General text, descriptions |
+| `bodySmall` | 12 | Helper text, captions |
 
-Tam liste icin bkz: `lib/product/theme/THEME.md`
+Full list: see `lib/product/theme/THEME.md`
 
-## Semantik Renkler (AppThemeColors)
+## Semantic Colors (AppThemeColors)
 
-Variant'tan bagimsiz, dark/light'a duyarli sabit renkler icin `AppThemeColors` kullanilir.
+Use `AppThemeColors` for variant-independent, dark/light-aware fixed colors.
 
 ```dart
 import 'package:akillisletme/product/theme/app_theme_colors.dart';
 
-// Kisa erisim (onerilen)
+// Short access (recommended)
 context.appColors.scoreGold
 context.appColors.toggleActive
 
-// Renk erisim onceligi:
+// Color access priority:
 // 1. Theme colorScheme → Theme.of(context).colorScheme.primary
-// 2. Semantik renkler → context.appColors.scoreGold
-// 3. Inline renk KULLANMA
+// 2. Semantic colors → context.appColors.scoreGold
+// 3. NEVER use inline colors
 ```
 
 ## Existing shared widgets
 
 | Widget | Location | Usage |
-|---|---|---|
-| `AppPrimaryButton` | `product/widget/` | Birincil aksiyon butonu (FilledButton, haptic feedback) |
-| `AppSecondaryButton` | `product/widget/` | Ikincil aksiyon butonu (OutlinedButton, haptic feedback) |
-| `AppTextButton` | `product/widget/` | Hafif metin butonu (TextButton, haptic feedback) |
-| `ThemeSettingTile` | `product/theme/widget/` | Tema secim tile'i (gradient kart gorunumlu) |
-| `ThemeSelectionDialog` | `product/theme/widget/` | Tema secim dialog'u (Wrap grid + ThemeMode secici) |
-| `SettingsSection` | `feature/settings/widget/` | Ayarlar grubu karti |
-| `BackgroundAnimationTile` | `feature/settings/widget/` | Arka plan animasyonu on/off switch'i |
+|--------|----------|-------|
+| `AppPrimaryButton` | `product/widget/` | Primary action button (FilledButton, haptic feedback) |
+| `AppSecondaryButton` | `product/widget/` | Secondary action button (OutlinedButton, haptic feedback) |
+| `AppTextButton` | `product/widget/` | Light text button (TextButton, haptic feedback) |
+| `ThemeSettingTile` | `product/theme/widget/` | Theme selection tile (gradient card) |
+| `ThemeSelectionDialog` | `product/theme/widget/` | Theme selection dialog (Wrap grid + ThemeMode selector) |
+| `SettingsSection` | `feature/settings/widget/` | Settings group card |
+| `BackgroundAnimationTile` | `feature/settings/widget/` | Background animation on/off switch |
 
 ## Existing shared utilities
 
 | Utility | Location | Usage |
-|---|---|---|
-| `AppPaddings` | `product/const/app_paddings.dart` | Padding/spacing sabitleri — hardcoded deger kullanma |
+|---------|----------|-------|
+| `AppPaddings` | `product/const/app_paddings.dart` | Padding/spacing constants — no hardcoded values |
 | `AppMessenger` | `product/utils/app_messenger.dart` | SnackBar, Dialog, BottomSheet — context extension |
 
-### AppPaddings kullanimi
+### AppPaddings usage
 
-Hardcoded `EdgeInsets.all(24)` yerine `AppPaddings` kullan:
+Use `AppPaddings` instead of hardcoded `EdgeInsets.all(24)`:
 
 ```dart
-// Hazir EdgeInsets
+// Predefined EdgeInsets
 padding: AppPaddings.allXxl            // EdgeInsets.all(24)
 padding: AppPaddings.page              // horizontal: 16, vertical: 8
 padding: AppPaddings.horizontalL       // horizontal: 16
 
-// Double deger olarak
+// As double value
 SizedBox(height: AppPaddings.m)        // 12
 ```
 
-### AppMessenger kullanimi
+### AppMessenger usage
 
-Kullaniciya geri bildirim gosterirken `AppMessenger` extension'i kullan:
+Use `AppMessenger` extension for user feedback:
 
 ```dart
 // SnackBar
-context.showSuccessSnack('Kaydedildi!');
-context.showErrorSnack('Bir hata olustu');
-context.showInfoSnack('Bilgilendirme');
+context.showSuccessSnack('Saved!');
+context.showErrorSnack('An error occurred');
+context.showInfoSnack('Information');
 
-// Onay dialog'u (true/false doner)
+// Confirmation dialog (returns true/false)
 final confirmed = await context.showConfirmDialog(
-  title: 'Silmek istediginize emin misiniz?',
-  message: 'Bu islem geri alinamaz.',
-  isDestructive: true,  // kirmizi buton
+  title: 'Are you sure you want to delete?',
+  message: 'This action cannot be undone.',
+  isDestructive: true,  // red button
 );
 
 // Bottom sheet
@@ -127,5 +127,5 @@ context.showAppBottomSheet<void>(child: MyContentWidget());
 - Every repeated or complex UI piece is extracted into a separate file under `widget/`
 - Widgets use `final` parameters with `const` constructors
 - Callbacks are received via `VoidCallback` or `ValueChanged<T>`
-- Inline `TextStyle(fontSize: ...)` kullanma — `Theme.of(context).textTheme.*` kullan
-- Inline renk kullanma — `colorScheme.*` veya `context.appColors.*` kullan
+- Do not use inline `TextStyle(fontSize: ...)` — use `Theme.of(context).textTheme.*`
+- Do not use inline colors — use `colorScheme.*` or `context.appColors.*`

@@ -1,76 +1,76 @@
 # Data Storage
 
-Detaylı kullanım rehberi: **`lib/product/cache/CACHE_GUIDE.md`**
+Detailed usage guide: **`lib/product/cache/CACHE_GUIDE.md`**
 
-## A) Basit veri — SharedCache (SharedPreferences)
+## A) Simple data — SharedCache (SharedPreferences)
 
-Ayarlar, flag'ler, basit string/bool/int değerler için `SharedCache` kullan.
+Use `SharedCache` for settings, flags, and simple string/bool/int values.
 
 ```
 lib/product/cache/shared_operation/
   shared_cache.dart               # Singleton — high-level getter/setter API
-  shared_keys.dart                # Key enum'u
+  shared_keys.dart                # Key enum
   base_shared_operation.dart      # Abstract base + implementation
   shared_operation_generic_mixin.dart  # Type-safe generic read/write
 ```
 
-### Yeni key ekleme
+### Adding a new key
 
-1. `shared_keys.dart`'a key ekle:
+1. Add key to `shared_keys.dart`:
 ```dart
 enum SharedKeys {
   firstAppOpen,
   theme,
   themeVariant,
-  yeniKey,          // <-- ekle
+  newKey,          // <-- add
 }
 ```
 
-2. `shared_cache.dart`'a getter/setter ekle:
+2. Add getter/setter to `shared_cache.dart`:
 ```dart
-bool get isYeniKey =>
-    getValue<bool>(SharedKeys.yeniKey) ?? false;
+bool get isNewKey =>
+    getValue<bool>(SharedKeys.newKey) ?? false;
 
-Future<void> setYeniKey({required bool value}) async {
-  await setValue<bool>(SharedKeys.yeniKey, value);
+Future<void> setNewKey({required bool value}) async {
+  await setValue<bool>(SharedKeys.newKey, value);
 }
 ```
 
-3. Kullanım:
+3. Usage:
 ```dart
-final deger = locator.sharedCache.isYeniKey;
-await locator.sharedCache.setYeniKey(value: true);
+final value = locator.sharedCache.isNewKey;
+await locator.sharedCache.setNewKey(value: true);
 ```
 
-### Desteklenen tipler
+### Supported types
 `bool`, `int`, `double`, `String`, `List<String>`
 
 ---
 
-## B) Karmaşık veri / Cache — ProductCache (Hive CE)
+## B) Complex data / Cache — ProductCache (Hive CE)
 
-Model listeleri, koleksiyonlar, offline cache için `ProductCache` kullan.
+Use `ProductCache` for model lists, collections, and offline cache.
 
 ```
 lib/product/cache/
-  product_cache.dart                # Ana koordinatör
-  cache_manager.dart                # Soyut arayüzler
+  product_cache.dart                # Main coordinator
+  cache_manager.dart                # Abstract interfaces
   hive_v2/
-    hive_cache.dart                 # Hive başlatma
+    hive_cache.dart                 # Hive initialization
     hive_operation_manager.dart     # Generic CRUD
     hive_adapters.dart              # @GenerateAdapters
     model/
-      app_cache_model.dart          # Örnek model
+      app_cache_model.dart          # Example model
 ```
 
-### Yeni cache modeli ekleme
+### Adding a new cache model
 
-1. `hive_v2/model/` altında model oluştur (`CacheModel` mixin + `EquatableMixin` + `@JsonSerializable()`)
-2. `hive_adapters.dart`'a `AdapterSpec<Model>()` ekle (nested modeller dahil)
-3. `product_cache.dart`'a `late final CacheOperation<Model>` ekle + `init()` listesine empty constructor ekle
-4. `dart run build_runner build --delete-conflicting-outputs` çalıştır
+1. Create model in `hive_v2/model/` (`CacheModel` mixin + `EquatableMixin` + `@JsonSerializable()`)
+2. Add `AdapterSpec<Model>()` to `hive_adapters.dart` (including nested models)
+3. Add `late final CacheOperation<Model>` to `product_cache.dart` + add empty constructor to `init()` list
+4. Run `dart run build_runner build --delete-conflicting-outputs`
 
-### Kullanım
+### Usage
 
 ```dart
 final cache = locator.productCache;
@@ -86,11 +86,11 @@ await cache.modelCache.removeAll();
 
 ---
 
-## Karar tablosu
+## Decision table
 
-| Veri tipi | Yöntem | Konum |
-|-----------|--------|-------|
-| Basit key-value (bool, int, String) | SharedCache | `cache/shared_operation/` |
-| Ayarlar, flag'ler | SharedCache | `cache/shared_operation/` |
-| Model listeleri, koleksiyonlar | ProductCache (Hive) | `cache/hive_v2/model/` |
-| Offline-first cached veri | ProductCache (Hive) | `cache/hive_v2/model/` |
+| Data type | Method | Location |
+|-----------|--------|----------|
+| Simple key-value (bool, int, String) | SharedCache | `cache/shared_operation/` |
+| Settings, flags | SharedCache | `cache/shared_operation/` |
+| Model lists, collections | ProductCache (Hive) | `cache/hive_v2/model/` |
+| Offline-first cached data | ProductCache (Hive) | `cache/hive_v2/model/` |

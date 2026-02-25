@@ -5,7 +5,7 @@
 The project uses type-safe `TypedGoRoute` + `GoRouteData` + code generation.
 Routes are defined in `lib/product/navigation/app_router.dart`.
 
-### Adding a new route (2 steps):
+### Adding a new route (3 steps):
 
 **1. Create a GoRouteData class** (`app_router.dart`):
 ```dart
@@ -80,25 +80,25 @@ FeatureRoute($extra: config).go(context);
 
 ## String Addition
 
-Projede iki string yontemi vardir:
+There are two string methods in the project:
 
-### A) Coklu Dil Destegi — EasyLocalization (oncelikli)
+### A) Multilingual — EasyLocalization (preferred)
 
-Kullaniciya gorunen tum metinler `assets/translations/` altindaki JSON dosyalarinda tanimlanir.
+All user-visible text is defined in JSON files under `assets/translations/`.
 
-**Yeni string ekleme (4 adim):**
+**Adding a new string (4 steps):**
 
-1. `assets/translations/tr.json` ve `assets/translations/en.json` dosyalarina key ekle:
+1. Add key to `assets/translations/tr.json` and `assets/translations/en.json`:
    ```json
    {
      "feature": {
-       "title": "Baslik",
-       "description": "Aciklama metni"
+       "title": "Title",
+       "description": "Description text"
      }
    }
    ```
 
-2. Type-safe key'leri yeniden olustur:
+2. Regenerate type-safe keys:
    ```bash
    flutter pub run easy_localization:generate \
      -O lib/product/init/language \
@@ -107,7 +107,7 @@ Kullaniciya gorunen tum metinler `assets/translations/` altindaki JSON dosyalari
      --source-dir assets/translations
    ```
 
-3. Widget'ta kullan:
+3. Use in widget:
    ```dart
    import 'package:easy_localization/easy_localization.dart';
    import 'package:akillisletme/product/init/language/locale_keys.g.dart';
@@ -115,29 +115,29 @@ Kullaniciya gorunen tum metinler `assets/translations/` altindaki JSON dosyalari
    Text(LocaleKeys.feature_title.tr())
    ```
 
-4. Dil degistirme:
+4. Change language:
    ```dart
    context.setLocale(const Locale('en', 'US'));
    ```
 
-**JSON yapilandirmasi:**
+**JSON configuration:**
 
-| Dosya | Konum |
-|-------|-------|
+| File | Location |
+|------|----------|
 | `tr.json` | `assets/translations/tr.json` |
 | `en.json` | `assets/translations/en.json` |
-| Locale ayari | `lib/product/init/language/core_localize.dart` |
-| Generated key'ler | `lib/product/init/language/locale_keys.g.dart` |
+| Locale config | `lib/product/init/language/core_localize.dart` |
+| Generated keys | `lib/product/init/language/locale_keys.g.dart` |
 
-**Kurallar:**
-- Key'ler nested JSON yapisi kullanir: `"feature": { "title": "..." }`
-- Generated dosyada key'ler alt cizgi ile birlenir: `LocaleKeys.feature_title`
-- Her iki dile de (TR + EN) eklemeyi unutma
-- Key ekledikten sonra generate komutunu calistir
+**Rules:**
+- Keys use nested JSON structure: `"feature": { "title": "..." }`
+- In the generated file, keys are joined with underscore: `LocaleKeys.feature_title`
+- Always add to BOTH language files (TR + EN)
+- Run the generate command after adding keys
 
-### B) Sabit Stringler — AppString
+### B) Constant Strings — AppString
 
-Cevirisi gerekmeyen sabit degerler (URL, store link, teknik string) icin.
+For non-translatable constant values (URLs, store links, technical strings).
 
 ```
 lib/product/const/app_string.dart

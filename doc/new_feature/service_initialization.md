@@ -1,14 +1,14 @@
 # Service Initialization & Locator
 
-Tüm servisler şu akışla başlatılır:
+All services are initialized with the following flow:
 
 ```
 ApplicationInit.start()
   -> WidgetsFlutterBinding.ensureInitialized()
-  -> Firebase.initializeApp(...)          // Firebase gerektiğinde
+  -> Firebase.initializeApp(...)          // When Firebase is enabled
   -> setupLocator()
-      -> _registerSingletons()            // Servisleri kaydet
-      -> _initializeServices()            // Async init çağır
+      -> _registerSingletons()            // Register services
+      -> _initializeServices()            // Call async init
 ```
 
 ## ApplicationInit (`lib/product/init/application_init.dart`)
@@ -62,24 +62,24 @@ extension ServiceLocator on GetIt {
 }
 ```
 
-## Locator'a yeni servis ekleme
+## Adding a new service to locator
 
-1. `_registerSingletons()`'a ekle:
+1. Add to `_registerSingletons()`:
    ```dart
    ..registerSingleton<NewService>(NewService.instance)
    ```
-2. Async init gerekiyorsa `_initializeServices()`'a ekle:
+2. If async init is needed, add to `_initializeServices()`:
    ```dart
    await locator<NewService>().init();
    ```
-3. `ServiceLocator` extension'a getter ekle:
+3. Add getter to `ServiceLocator` extension:
    ```dart
    NewService get newService => locator<NewService>();
    ```
 
 ## Init pattern
 
-Async setup gerektiren servisler şu pattern'i takip eder:
+Services that require async setup follow this pattern:
 
 ```dart
 class SomeService {
@@ -96,12 +96,12 @@ class SomeService {
 }
 ```
 
-## Mevcut servisler
+## Registered services
 
-| Servis | Tip | Erişim |
-|--------|-----|--------|
-| SharedCache | Basit key-value cache | `locator.sharedCache` |
+| Service | Type | Access |
+|---------|------|--------|
+| SharedCache | Simple key-value cache | `locator.sharedCache` |
 | ProductCache | Hive model cache | `locator.productCache` |
 | RemoteConfigService | Firebase Remote Config | `locator.remoteConfigService` |
-| UrlLauncherService | URL açma / mail gönderme | `locator.urlLauncher` |
-| PermissionService | İzin yönetimi (permission_handler) | `locator.permission` |
+| UrlLauncherService | URL opening / email sending | `locator.urlLauncher` |
+| PermissionService | Permission management (permission_handler) | `locator.permission` |

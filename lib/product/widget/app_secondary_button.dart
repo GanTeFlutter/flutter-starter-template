@@ -44,17 +44,13 @@ class AppSecondaryButton extends StatelessWidget {
   }
 
   Widget _label(BuildContext context) {
-    return Text(
-      label,
-      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.w700,
-          ),
-    );
+    return Text(label);
   }
 
   ButtonStyle _style(ColorScheme cs) {
     return OutlinedButton.styleFrom(
       padding: const EdgeInsets.symmetric(vertical: 16),
+      textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(14),
       ),

@@ -1,24 +1,6 @@
 # Flutter Starter Template
 
-A ready-to-use Flutter boilerplate that I use as the foundation for every new project. Instead of setting up architecture, theming, caching, and navigation from scratch each time, I clone this template and start building features immediately.
-
-## What's Included
-
-**Architecture** — Feature-based folder structure with BLoC/Cubit + Freezed for state management, GetIt for dependency injection, and GoRouter (type-safe, code-generated) for navigation.
-
-**Theming** — Material 3 theme system with 5 color variants, light/dark mode support, and a theme selection UI. Managed via Cubit + SharedPreferences.
-
-**Caching** — Dual-layer cache: SharedPreferences for simple key-value data, Hive CE for complex model storage. Both wrapped with clean abstractions.
-
-**Localization** — EasyLocalization with Turkish and English out of the box. Language switching built into the settings page.
-
-**Asset Generation** — FlutterGen for type-safe access to images, SVGs, Lottie animations, and fonts. No more hardcoded asset paths.
-
-**Shared Widgets & Utilities** — Reusable button components (primary, secondary, text) with haptic feedback, `AppPaddings` for consistent spacing, `AppMessenger` for SnackBar/Dialog/BottomSheet via context extensions, `RegexTypes` for common validation patterns, and responsive helpers.
-
-**Screens** — Splash, 5-step onboarding (with completion flag), home, and settings pages — all wired up and ready.
-
-**Documentation** — The `doc/new_feature/` directory is a built-in developer guide. It contains modular docs for every common task: creating a feature folder, adding models, services, state management, views, routes, assets, caching, and more. Each file is self-contained — read only the one you need. There's also a checklist to make sure nothing is missed when adding a new feature. See [`doc/new_feature/README.md`](doc/new_feature/README.md) for the full navigation table.
+A ready-to-use Flutter boilerplate for starting new projects without setting up architecture from scratch. Clone, configure, and start building features immediately.
 
 ## Screenshots
 
@@ -30,7 +12,6 @@ A ready-to-use Flutter boilerplate that I use as the foundation for every new pr
   <img src="app_image/settings.png" width="180" />
   <img src="app_image/about.png" width="180" />
 </p>
-
 
 ## Tech Stack
 
@@ -46,51 +27,32 @@ A ready-to-use Flutter boilerplate that I use as the foundation for every new pr
 
 ## Getting Started
 
-```bash
-# Install dependencies
-flutter pub get
+After cloning, see **[`doc/project.md`](doc/project.md)** — the main project guide. It covers everything you need to get started.
 
-# Run code generation
-dart run build_runner build --delete-conflicting-outputs
+If this is a fresh clone, follow **[`doc/new_feature/setup_after_clone.md`](doc/new_feature/setup_after_clone.md)** first to clean generated files, install dependencies, and run code generation.
 
-# Run the app
-flutter run
-```
+## Documentation
 
-## Project Structure
+The `doc/` directory is the built-in knowledge base for this project. Instead of memorizing conventions, read the relevant file.
 
-```
-├── doc/
-│   └── new_feature/          # Developer guides for adding features
-│       ├── README.md          # Quick navigation + checklist
-│       ├── folder_structure.md
-│       ├── model_rules.md
-│       ├── state_management.md
-│       ├── view_rules.md
-│       ├── service_rules.md
-│       ├── data_storage.md
-│       ├── route_and_strings.md
-│       ├── widget_and_theme.md
-│       ├── assets_and_flutter_gen.md
-│       └── ...
-├── lib/
-│   ├── feature/              # Feature modules
-│   │   ├── home/             # Home screen + background animation
-│   │   ├── login_process/    # Splash + Onboarding flow
-│   │   └── settings/         # Theme & language settings
-│   └── product/              # Shared infrastructure
-│       ├── cache/            # SharedCache + Hive (ProductCache)
-│       ├── const/            # AppPaddings, AppString, RegexTypes
-│       ├── generated/        # FlutterGen output (assets, fonts)
-│       ├── init/             # App init, localization, AppBuilder
-│       ├── navigation/       # GoRouter config + transitions
-│       ├── service/          # Service layer
-│       ├── state/            # App-wide cubits
-│       ├── theme/            # Material 3 themes + ThemeCubit
-│       ├── utils/            # AppMessenger, responsive, haptics
-│       └── widget/           # Shared button components
-└── assets/                   # Images, SVGs, Lottie, fonts, translations
-```
+| File | What it covers |
+|------|----------------|
+| [`project.md`](doc/project.md) | Project overview, architecture, all 14 built-in systems |
+| [`new_feature/setup_after_clone.md`](doc/new_feature/setup_after_clone.md) | Post-clone setup steps (with Firebase opt-in) |
+| [`new_feature/README.md`](doc/new_feature/README.md) | New feature checklist + task-based navigation table |
+| [`new_feature/folder_structure.md`](doc/new_feature/folder_structure.md) | Feature folder conventions |
+| [`new_feature/state_management.md`](doc/new_feature/state_management.md) | Cubit + Freezed patterns |
+| [`new_feature/view_rules.md`](doc/new_feature/view_rules.md) | StatelessWidget vs StatefulWidget + ViewModel |
+| [`new_feature/model_rules.md`](doc/new_feature/model_rules.md) | Freezed models vs Hive models |
+| [`new_feature/service_rules.md`](doc/new_feature/service_rules.md) | Shared vs module-specific services |
+| [`new_feature/service_initialization.md`](doc/new_feature/service_initialization.md) | GetIt locator registration + init flow |
+| [`new_feature/data_storage.md`](doc/new_feature/data_storage.md) | SharedCache vs ProductCache decision tree |
+| [`new_feature/route_and_strings.md`](doc/new_feature/route_and_strings.md) | TypedGoRoute + EasyLocalization strings |
+| [`new_feature/widget_and_theme.md`](doc/new_feature/widget_and_theme.md) | Widget placement, TextTheme, AppPaddings, AppMessenger |
+| [`new_feature/assets_and_flutter_gen.md`](doc/new_feature/assets_and_flutter_gen.md) | FlutterGen type-safe asset access |
+| [`new_feature/enums_and_constants.md`](doc/new_feature/enums_and_constants.md) | Enum and constant placement |
+| [`new_feature/settings_and_urls.md`](doc/new_feature/settings_and_urls.md) | Store URLs, contact info, legal links |
+| [`new_feature/firebase_commented_out.md`](doc/new_feature/firebase_commented_out.md) | Firebase activation guide |
 
 ## Credits
 
@@ -99,4 +61,3 @@ Some architectural patterns and utilities were referenced from [hatayi-yasat](ht
 ## License
 
 Feel free to use this template for your own projects.
-

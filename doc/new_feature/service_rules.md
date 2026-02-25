@@ -1,29 +1,29 @@
 # Service Rules
 
-## Karar ağacı
+## Decision tree
 
-1. **Locator'da var mı?** -> `service_locator.dart`'ı kontrol et. Varsa `locator<Service>()` ile al.
-2. **Genel/paylaşılan servis mi?** -> `lib/product/service/` altına ekle + locator'a kaydet.
-3. **Sadece bir modüle özel mi?** -> Feature klasöründe `service/` altına ekle, locator'a **ekleme**.
+1. **Does it exist in locator?** → Check `service_locator.dart`. If yes, use `locator<Service>()`.
+2. **Is it a general/shared service?** → Add under `lib/product/service/` + register in locator.
+3. **Is it specific to a single module?** → Add under the feature's `service/` folder, do NOT register in locator.
 
-## Paylaşılan servis ekleme
+## Adding a shared service
 
-Tek dosya -> `lib/product/service/services/<service_name>.dart`
-Çok dosya -> `lib/product/service/<service_name>/` klasörü oluştur
+Single file → `lib/product/service/services/<service_name>.dart`
+Multiple files → Create `lib/product/service/<service_name>/` folder
 
-Locator'a kaydet (`service_locator.dart`):
+Register in locator (`service_locator.dart`):
 ```dart
-// _registerSingletons içinde:
+// Inside _registerSingletons:
 ..registerSingleton<NewService>(NewService.instance)
 
-// Extension içinde:
+// Inside extension:
 NewService get newService => locator<NewService>();
 ```
 
-## Modüle özel servis
+## Module-specific service
 
-Feature klasöründe `service/` altına eklenir. Locator'a **kaydedilmez**.
-Sadece o modülün Cubit'i tarafından kullanılır.
+Added under `service/` in the feature folder. NOT registered in locator.
+Only used by that module's Cubit.
 
 ```
 lib/feature/<feature_name>/
@@ -31,13 +31,13 @@ lib/feature/<feature_name>/
     <feature>_service.dart
 ```
 
-## Cache servisleri
+## Cache services
 
-Cache ihtiyaçları için locator'daki mevcut servisleri kullan:
+Use existing services in locator for cache needs:
 
-| İhtiyaç | Servis | Erişim |
-|---------|--------|--------|
-| Basit key-value | SharedCache | `locator.sharedCache` |
-| Model/liste cache | ProductCache | `locator.productCache` |
+| Need | Service | Access |
+|------|---------|--------|
+| Simple key-value | SharedCache | `locator.sharedCache` |
+| Model/list cache | ProductCache | `locator.productCache` |
 
-Detaylar: [data_storage.md](data_storage.md)
+Details: [data_storage.md](data_storage.md)

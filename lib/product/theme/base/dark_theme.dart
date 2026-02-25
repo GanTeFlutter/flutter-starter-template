@@ -14,6 +14,7 @@ ThemeData _buildDarkTheme(ColorScheme cs) => ThemeData(
       outlinedButtonTheme: _buildOutlinedButtonTheme(cs),
       chipTheme: _buildChipTheme(cs),
       sliderTheme: _buildSliderTheme(cs),
+      switchTheme: _buildSwitchTheme(cs),
       dialogTheme: _dialogTheme,
       extensions: const [AppThemeColors.dark],
     );

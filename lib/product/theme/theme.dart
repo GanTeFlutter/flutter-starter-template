@@ -9,6 +9,7 @@ part 'parts/input_theme.dart';
 part 'parts/appbar_theme.dart';
 part 'parts/chip_theme.dart';
 part 'parts/slider_theme.dart';
+part 'parts/switch_theme.dart';
 part 'base/dark_theme.dart';
 part 'base/light_theme.dart';
 part 'parts/text_theme.dart';

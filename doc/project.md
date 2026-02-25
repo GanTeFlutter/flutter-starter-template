@@ -1,309 +1,305 @@
-# Flutter Starter Template
+# Flutter Starter Template — Project Guide
 
-Yeni bir Flutter projesine hizli baslamak icin hazirlanmis boilerplate/template projesidir. Icerisinde tema, cache, navigasyon, dil destegi, state yonetimi, servis altyapisi, onboarding ve ayarlar sayfasi hazir olarak gelir.
+This is the first file to read to understand the project.
+It explains what the project is, how it works, and where to find other documentation.
 
-## Kurulum
+---
 
-```bash
-# Bagimlikari yukle
-flutter pub get
+## First Clone?
 
-# Code-gen dosyalarini olustur
-dart run build_runner build --delete-conflicting-outputs
+If you just cloned this project from GitHub, follow this guide first:
 
-# Locale key'lerini olustur
-flutter pub run easy_localization:generate -O lib/product/init/language -f keys -o locale_keys.g.dart --source-dir assets/translations
+→ **[setup_after_clone.md](new_feature/setup_after_clone.md)** — Clean generated files, install dependencies, code-gen, Firebase question, and error analysis steps.
+
+Come back to this file after setup is complete.
+
+---
+
+## What Is This Project?
+
+A ready-to-use Flutter boilerplate/template for quickly starting new projects.
+Includes theming, caching, navigation, localization, state management, service infrastructure, onboarding, and settings page out of the box.
+
+- **Package name:** `akillisletme` (should be changed for new projects)
+- **State Management:** Cubit + Freezed
+- **DI:** GetIt (singleton pattern)
+- **Routing:** GoRouter (type-safe, code-gen)
+- **Cache:** SharedCache (SharedPreferences) + ProductCache (Hive CE)
+- **Localization:** EasyLocalization (TR + EN)
+- **Assets:** FlutterGen (type-safe)
+- **Lint:** `very_good_analysis`
+
+---
+
+## Project Structure
+
 ```
+doc/
+├── project.md                             # ← THIS FILE (project guide)
+└── new_feature/                           # All guide documents
+    ├── README.md                          # New feature checklist + navigation
+    ├── setup_after_clone.md               # Post-clone setup (Claude Code instructions)
+    ├── firebase_commented_out.md          # Firebase activation guide
+    ├── folder_structure.md                # Feature folder structure
+    ├── model_rules.md                     # Model creation rules
+    ├── state_management.md                # Cubit + Freezed rules
+    ├── view_rules.md                      # View structure rules
+    ├── service_rules.md                   # Service placement rules
+    ├── service_initialization.md          # Locator + init flow
+    ├── data_storage.md                    # Cache/storage decision tree
+    ├── route_and_strings.md               # Route + string addition
+    ├── widget_and_theme.md                # Widget + theme rules
+    ├── enums_and_constants.md             # Enum + constant rules
+    ├── assets_and_flutter_gen.md          # FlutterGen asset addition
+    └── settings_and_urls.md               # Store URLs + contact info
 
-## Proje Yapisi
-
-```
 lib/
-├── main.dart                              # Uygulama giris noktasi
-├── feature/                               # Ekranlar / ozellikler
+├── main.dart                              # App entry point
+├── feature/                               # Screens / features
 │   ├── home/
-│   │   ├── home_view.dart                 # Ana sayfa (StatefulWidget + ViewModel)
+│   │   ├── home_view.dart                 # Home page (StatefulWidget + ViewModel)
 │   │   ├── home_view_mode.dart            # ViewModel (abstract State)
 │   │   └── widget/
-│   │       └── home_background.dart       # Global animasyonlu arka plan
+│   │       └── home_background.dart       # Global animated background
 │   ├── login_process/
-│   │   ├── onboarding/
-│   │   │   ├── onboarding_view.dart       # 5 adimlik PageView onboarding
-│   │   │   ├── onboarding_view_model.dart # ViewModel (abstract State)
-│   │   │   ├── cubit/
-│   │   │   │   └── onboarding_cubit.dart  # Sayfa navigasyonu + tamamlama
-│   │   │   └── steps/
-│   │   │       ├── step1/step_1.dart
-│   │   │       ├── step2/step_2.dart
-│   │   │       ├── step3/step_3.dart
-│   │   │       ├── step4/step_4.dart
-│   │   │       └── step5/step_5.dart      # Son adim
-│   │   └── splash/
-│   │       ├── splash_view.dart           # Splash ekrani
-│   │       ├── state/                     # SplashCubit + Freezed state
-│   │       └── widgets/                   # error, loading, update_required
+│   │   ├── onboarding/                    # 5-step onboarding
+│   │   └── splash/                        # Splash screen + SplashCubit
 │   └── settings/
-│       ├── settings_view.dart             # Ayarlar sayfasi
-│       └── widget/
-│           ├── settings_section.dart      # Gruplu kart widget
-│           ├── theme_tile.dart            # Tema secim tile'i
-│           └── language_tile.dart         # Dil degistirme tile'i
-└── product/                               # Paylasilan altyapi katmani
-    ├── cache/                             # Cache sistemi (SharedCache + Hive)
-    ├── const/                             # Sabitler (AppString, AppPaddings, RegexTypes)
-    ├── init/                              # Uygulama baslatma
-    │   ├── app_builder.dart               # Global background + overlay builder
-    │   ├── application_init.dart          # Binding + locator init
-    │   ├── state_initialize.dart          # MultiBlocProvider (global cubits)
-    │   └── language/                      # EasyLocalization ayarlari
-    ├── navigation/                        # GoRouter yapilandirmasi + gecis animasyonlari
-    ├── service/                           # Servisler + GetIt DI
-    ├── state/                             # App-wide state (ThemeCubit vb.)
-    ├── theme/                             # Tema sistemi (5 variant, dark/light)
-    ├── generated/                         # FlutterGen output (assets.gen.dart, fonts.gen.dart)
-    ├── utils/                             # AppMessenger, responsive, haptic feedback, decorations
-    └── widget/                            # Paylasilan butonlar
+│       ├── settings_view.dart             # Settings page
+│       └── widget/                        # Theme, language tiles
+└── product/                               # Shared infrastructure layer
+    ├── cache/                             # SharedCache + Hive (ProductCache)
+    ├── const/                             # AppString, AppPaddings, RegexTypes
+    ├── init/                              # App init, localization, AppBuilder
+    ├── navigation/                        # GoRouter config + transitions
+    ├── service/                           # Services + GetIt DI
+    ├── state/                             # App-wide cubits (ThemeCubit)
+    ├── theme/                             # Material 3 theme (5 variants, dark/light)
+    ├── generated/                         # FlutterGen output
+    ├── utils/                             # AppMessenger, responsive, haptics
+    └── widget/                            # Shared buttons
 ```
 
-## Uygulama Akisi
+---
+
+## App Flow
 
 ```
-Ilk acilis:  Onboarding (5 step) → Home
-Sonraki:     Home (direkt)
+First launch:  Splash → Onboarding (5 steps) → Home
+Subsequent:    Splash → Home (direct)
 ```
 
-- Onboarding tamamlaninca `SharedCache.isOnboardingCompleted` kaydedilir
-- Router `initialLocation` bu flag'e gore karar verir
-- Home'dan Settings sayfasina gecilir (tema + dil ayarlari)
-- Global arka plan animasyonu `AppBuilder` ile tum sayfalarda gorunur
+- Onboarding completion is saved to `SharedCache.isOnboardingCompleted`
+- Router `initialLocation` decides based on this flag
+- Settings page is accessible from Home AppBar
+- Global background animation is visible on all pages via `AppBuilder`
 
-## Hazir Gelen Altyapilar
+---
 
-### 1. Tema Sistemi
+## Built-in Infrastructure
 
-5 renk varianti (Purple, Blue, Green, Orange, Red) ile Material 3 tema sistemi. Dark/light otomatik.
+### 1. Theme System
 
-- **Yapilandirma:** `lib/product/theme/`
-- **State:** `ThemeCubit` — variant secimini SharedCache'e kaydeder
-- **Kullanim:** `context.watch<ThemeCubit>().state` ile variant al
-- **Secim dialog'u:** `ThemeSelectionDialog.show(context)`
-- **Detay:** `lib/product/theme/THEME.md`
+5 color variants (Purple, Blue, Green, Orange, Red) with Material 3. Auto dark/light.
 
-### 2. Cache Sistemi
+- **Location:** `lib/product/theme/`
+- **State:** `ThemeCubit` — saves variant selection to SharedCache
+- **Usage:** `context.watch<ThemeCubit>().state`
+- **Selection dialog:** `ThemeSelectionDialog.show(context)`
+- **Details:** `lib/product/theme/THEME.md`
 
-Iki katmanli cache: basit key-value icin SharedCache, karmasik modeller icin Hive.
+### 2. Cache System
 
-| Veri Tipi | Sistem | Erisim |
+| Data Type | System | Access |
 |-----------|--------|--------|
 | bool, int, String | SharedCache | `locator.sharedCache` |
-| Model listeleri | ProductCache (Hive) | `locator.productCache` |
+| Model lists | ProductCache (Hive) | `locator.productCache` |
 
-- **Yapilandirma:** `lib/product/cache/`
-- **Detay:** `lib/product/cache/CACHE_GUIDE.md`
+- **Location:** `lib/product/cache/`
+- **Details:** `lib/product/cache/CACHE_GUIDE.md`
 
-### 3. Navigasyon
+### 3. Navigation
 
-Type-safe GoRouter ile routing. `go_router_builder` code-gen kullanir.
+Type-safe GoRouter with `go_router_builder` code-gen.
 
-- **Yapilandirma:** `lib/product/navigation/app_router.dart`
-- **Gecis animasyonlari:** `route_transitions.dart` (slide + fade, staggered fade)
-- **Yeni rota:** `TypedGoRoute` + `GoRouteData` ekle, `build_runner` calistir
-
-**Mevcut rotalar:**
-
-| Rota | Path | Gecis |
-|------|------|-------|
+| Route | Path | Transition |
+|-------|------|------------|
 | HomeRoute | `/` | fade |
 | SettingsRoute | `/settings` | slide right + fade |
 | OnboardingRoute | `/onboarding` | fade |
 
-### 4. Coklu Dil Destegi (i18n)
+- **Location:** `lib/product/navigation/app_router.dart`
+- **Details:** `doc/new_feature/route_and_strings.md`
 
-`easy_localization` ile TR + EN destegi. JSON tabanli ceviri dosyalari.
+### 4. Localization (i18n)
 
-- **Ceviri dosyalari:** `assets/translations/tr.json`, `en.json`
-- **Locale ayari:** `lib/product/init/language/core_localize.dart`
-- **Type-safe key'ler:** `lib/product/init/language/locale_keys.g.dart` (generated)
-- **Kullanim:** `LocaleKeys.home_title.tr()`
-- **Dil degistirme:** `context.setLocale(Locale('en', 'US'))`
-- **Yeni key ekleyince:** locale_keys'i yeniden olustur (yukaridaki komutu calistir)
+`easy_localization` with TR + EN. JSON-based translation files.
 
-### 5. State Yonetimi
+- **Translation files:** `assets/translations/tr.json`, `en.json`
+- **Type-safe keys:** `lib/product/init/language/locale_keys.g.dart` (generated)
+- **Usage:** `LocaleKeys.home_title.tr()`
+- **Change language:** `context.setLocale(Locale('en', 'US'))`
 
-flutter_bloc + Freezed ile state yonetimi.
+### 5. State Management
 
-- **App-wide state:** `lib/product/state/` (ThemeCubit gibi)
-- **Feature state:** `lib/feature/<feature>/state/` veya `cubit/` (SplashCubit, OnboardingCubit gibi)
-- **Provider kaydi:** `lib/product/init/state_initialize.dart`
+flutter_bloc + Freezed.
+
+- **App-wide:** `lib/product/state/` (e.g. ThemeCubit)
+- **Feature-level:** `lib/feature/<feature>/state/`
+- **Provider registration:** `lib/product/init/state_initialize.dart`
+- **Details:** `doc/new_feature/state_management.md`
 
 ### 6. Dependency Injection
 
-GetIt ile singleton servis yonetimi.
+GetIt singleton service management.
 
-- **Yapilandirma:** `lib/product/service/service_locator.dart`
-- **Erisim:** `locator.sharedCache`, `locator.productCache`
-- **Yeni servis:** `_registerSingletons()`'a ekle + extension'a getter ekle
+- **Location:** `lib/product/service/service_locator.dart`
+- **Access:** `locator.sharedCache`, `locator.productCache`
+- **Details:** `doc/new_feature/service_initialization.md`
 
 ### 7. Onboarding
 
-5 adimlik PageView tabanli onboarding akisi.
+5-step PageView. Completion saves `SharedCache.isOnboardingCompleted = true`.
 
-- **Yapilandirma:** `lib/feature/login_process/onboarding/`
-- **Navigasyon:** Sol ok + sayfa gostergesi + sag ok (alt bar)
-- **Tamamlama:** Son adimda sag ok `completeOnboarding()` cagirarak Home'a yonlendirir
-- **Kalicilik:** `SharedCache.isOnboardingCompleted` ile ikinci acilista atlanir
+- **Location:** `lib/feature/login_process/onboarding/`
+- **Details:** `lib/feature/login_process/onboarding/ONBOARDING.md`
 
-### 8. Ayarlar Sayfasi
+### 8. Settings Page
 
-Tema secimi ve dil degistirme iceren ayarlar sayfasi.
+Theme selection + language switching. Accessible via Home AppBar settings icon.
 
-- **Yapilandirma:** `lib/feature/settings/`
-- **Erisim:** Home AppBar'daki settings ikonu
-- **Icerik:** Gorunum bolumu (tema + dil)
+- **Location:** `lib/feature/settings/`
 
-### 9. Global Arka Plan Animasyonu
+### 9. Global Background Animation
 
-Tum sayfalarda gorunen animasyonlu "Flutter Starter Template" yazilari.
+Animated background visible on all pages.
 
-- **Yapilandirma:** `lib/feature/home/widget/home_background.dart`
-- **Entegrasyon:** `AppBuilder` (`lib/product/init/app_builder.dart`) ile `MaterialApp.builder` uzerinden
-- **Acma/kapama:** `HomeBackground.enabledNotifier` ile kontrol edilir
+- **Location:** `lib/feature/home/widget/home_background.dart`
+- **Toggle:** `HomeBackground.enabledNotifier`
 
-### 10. FlutterGen (Type-Safe Asset Erisimi)
+### 10. FlutterGen
 
-Asset dosyalarina hardcoded path yerine type-safe erisim saglar. Compile-time hata kontrolu + IDE autocomplete.
+Type-safe asset access with compile-time error checking + IDE autocomplete.
 
-- **Yapilandirma:** `pubspec.yaml` altinda `flutter_gen:` blogu
-- **Output:** `lib/product/generated/assets.gen.dart`, `fonts.gen.dart`
-- **Desteklenen tipler:** Image (PNG/JPG), SVG (`flutter_svg`), Lottie, Font
-- **Kullanim:**
-  ```dart
-  Assets.image.booom.image(width: 100)    // PNG/JPG
-  Assets.svg.bomb.svg(width: 24)          // SVG
-  Assets.lottie.backroundAnimation.lottie() // Lottie
-  FontFamily.poppins                       // Font ailesi
-  ```
-- **Yeni asset ekleyince:** dosyayi `assets/<tip>/` klasorune koy, `build_runner` calistir
-- **Detay:** `doc/new_feature/assets_and_flutter_gen.md`
+```dart
+Assets.image.booom.image(width: 100)     // PNG/JPG
+Assets.svg.bomb.svg(width: 24)           // SVG
+Assets.lottie.backroundAnimation.lottie() // Lottie
+FontFamily.poppins                        // Font
+```
 
-### 11. AppPaddings (Padding Sabitleri)
+- **Details:** `doc/new_feature/assets_and_flutter_gen.md`
 
-Tum uygulamada tutarli bosluk degerleri. Hardcoded `EdgeInsets.all(24)` yerine `AppPaddings` kullanilir.
+### 11. AppPaddings
 
-- **Dosya:** `lib/product/const/app_paddings.dart`
-- **Degerler:** xs=4, s=8, m=12, l=16, xl=20, xxl=24, xxxl=32
-- **Hazir EdgeInsets:** `AppPaddings.allXxl`, `AppPaddings.page`, `AppPaddings.horizontalL`
-- **Responsive:** `EdgeInsets.all(context.r(AppPaddings.l))`
+Consistent spacing constants. Used instead of hardcoded `EdgeInsets`.
 
-### 12. AppMessenger (Kullanici Geri Bildirimi)
+- **Values:** xs=4, s=8, m=12, l=16, xl=20, xxl=24, xxxl=32
+- **File:** `lib/product/const/app_paddings.dart`
 
-SnackBar, Dialog ve BottomSheet gostermek icin BuildContext extension'lari.
+### 12. AppMessenger
 
-- **Dosya:** `lib/product/utils/app_messenger.dart`
-- **Kullanim:**
-  ```dart
-  context.showSuccessSnack('Kaydedildi!');
-  context.showErrorSnack('Hata olustu');
-  context.showInfoSnack('Bilgi');
-  final confirmed = await context.showConfirmDialog(title: '...', message: '...');
-  context.showAppBottomSheet<void>(child: MyWidget());
-  ```
+Context extensions for SnackBar, Dialog, and BottomSheet.
 
-### 13. RegexTypes (Validation Pattern'leri)
+```dart
+context.showSuccessSnack('Saved!');
+context.showErrorSnack('An error occurred');
+context.showConfirmDialog(title: '...', message: '...');
+context.showAppBottomSheet<void>(child: MyWidget());
+```
 
-Form dogrulama ve input formatlama icin regex desenleri. Turkce karakter destekli.
+- **File:** `lib/product/utils/app_messenger.dart`
 
-- **Dosya:** `lib/product/const/regex_types.dart`
-- **Pattern'ler:** fullName, email, studentEmail, digitsOnly, phoneNumber, password
-- **Kullanim:** `RegexTypes.email.hasMatch(value)`
+### 13. RegexTypes
 
-### 14. Firebase (Opsiyonel)
+Validation patterns with Turkish character support: fullName, email, phoneNumber, password, etc.
 
-Firebase Remote Config entegrasyonu hazir (version check icin). Firebase aktif edilince:
+- **File:** `lib/product/const/regex_types.dart`
+- **Usage:** `RegexTypes.email.hasMatch(value)`
 
-1. `application_init.dart`'taki Firebase satirini uncomment et
-2. `firebase_options.dart` dosyasini olustur (`flutterfire configure`)
-3. `service_locator.dart`'ta RemoteConfigService kaydini uncomment et
+### 14. Firebase (Optional)
 
-## Paylasilan Widget'lar
+Firebase Remote Config integration is ready but commented out. To activate:
 
-| Widget | Dosya | Aciklama |
-|--------|-------|----------|
-| AppPrimaryButton | `product/widget/` | Birincil aksiyon butonu (FilledButton) |
-| AppSecondaryButton | `product/widget/` | Ikincil aksiyon butonu (OutlinedButton) |
-| AppTextButton | `product/widget/` | Hafif metin butonu (TextButton) |
-| ThemeSettingTile | `product/theme/widget/` | Tema secim tile'i (kart gorunumlu) |
-| ThemeSelectionDialog | `product/theme/widget/` | Tema secim dialog'u (grid) |
-| SettingsSection | `feature/settings/widget/` | Ayarlar grubu karti |
-| ThemeTile | `feature/settings/widget/` | Ayarlar icin tema ListTile |
-| LanguageTile | `feature/settings/widget/` | Ayarlar icin dil ListTile |
+→ **[firebase_commented_out.md](new_feature/firebase_commented_out.md)**
 
-## Utility'ler
+---
 
-| Utility | Dosya | Aciklama |
-|---------|-------|----------|
-| AppMessenger | `product/utils/` | SnackBar, Dialog, BottomSheet — context extension |
-| AppPaddings | `product/const/` | Padding/spacing sabitleri — hardcoded deger kullanma |
-| RegexTypes | `product/const/` | Turkce karakter destekli validation regex'leri |
-| ResponsiveExtension | `product/utils/` | `context.r(20)`, `context.rf(16)` — responsive boyutlandirma |
-| ButtonFeedback | `product/utils/` | Haptic + ses geri bildirimi |
-| ThemeDecorations | `product/utils/` | Tema bazli container decoration |
+## Shared Widgets
 
-## Font'lar
+| Widget | Location | Description |
+|--------|----------|-------------|
+| AppPrimaryButton | `product/widget/` | FilledButton |
+| AppSecondaryButton | `product/widget/` | OutlinedButton |
+| AppTextButton | `product/widget/` | TextButton |
+| ThemeSettingTile | `product/theme/widget/` | Theme selection tile |
+| ThemeSelectionDialog | `product/theme/widget/` | Theme selection dialog |
+| SettingsSection | `feature/settings/widget/` | Settings group card |
 
-| Font | Kullanim |
-|------|----------|
-| Poppins | Display + Headline (buyuk basliklar) |
-| Inter | Title + Label + Body (govde metni) |
+## Utilities
 
-## Dokumantasyon Sistemi
+| Utility | File | Description |
+|---------|------|-------------|
+| AppMessenger | `product/utils/` | SnackBar, Dialog, BottomSheet |
+| AppPaddings | `product/const/` | Padding/spacing constants |
+| RegexTypes | `product/const/` | Validation regex patterns |
+| ResponsiveExtension | `product/utils/` | `context.r(20)`, `context.rf(16)` |
+| ButtonFeedback | `product/utils/` | Haptic + sound feedback |
+| ThemeDecorations | `product/utils/` | Theme-based container decoration |
 
-Proje icerisinde iki dokumantasyon katmani vardir:
+## Fonts
 
-### `doc/new_feature/`
+| Font | Usage |
+|------|-------|
+| Poppins | Display + Headline (large titles) |
+| Inter | Title + Label + Body (body text) |
 
-Yeni bir ozellik eklerken adim adim rehber. Her konu icin ayri `.md` dosyasi:
+---
 
-| Dosya | Konu |
-|-------|------|
-| `README.md` | Genel checklist + yonlendirme tablosu |
-| `folder_structure.md` | Klasor yapisi kurallari |
-| `data_storage.md` | Cache/storage karar agaci |
-| `model_rules.md` | Model olusturma kurallari |
-| `state_management.md` | Cubit + Freezed kurallari |
-| `view_rules.md` | View yapisi kurallari |
-| `widget_and_theme.md` | Widget + tema kurallari |
-| `service_rules.md` | Servis yerlestirme kurallari |
-| `service_initialization.md` | Locator + init akisi |
-| `route_and_strings.md` | Rota + string ekleme |
-| `enums_and_constants.md` | Enum + sabit kurallari |
-| `assets_and_flutter_gen.md` | FlutterGen ile asset ekleme |
+## Documentation Map
 
-### Inline rehberler
+To find which file to read when adding a new feature:
 
-| Dosya | Konum | Konu |
-|-------|-------|------|
-| `CACHE_GUIDE.md` | `lib/product/cache/` | Cache sistemi kullanim rehberi |
-| `THEME.md` | `lib/product/theme/` | Tema sistemi dokumantasyonu |
-| `ONBOARDING.md` | `lib/feature/login_process/onboarding/` | Onboarding modulu dokumantasyonu |
+→ **[doc/new_feature/README.md](new_feature/README.md)** — Task-based navigation table + 24-item checklist
 
-## Yeni Projeye Baslarken
+### Inline guides (inside code)
 
-1. Bu repoyu klonla / kopyala
-2. `pubspec.yaml`'da `name` alanini degistir
-3. Proje genelinde package adini guncelle (`akillisletme` -> yeni isim)
-4. `assets/translations/` icindeki stringleri guncelle
-5. `AppString`'deki store URL'lerini doldur
-6. `home_background.dart`'taki animasyon metnini degistir veya animasyonu ozellestir
-7. `app_theme_variant.dart`'tan ihtiyac disinda olan renkleri kaldir veya yenilerini ekle
-8. Onboarding step'lerinin iceriklerini guncelle (simdilik placeholder)
-9. `flutter pub get && dart run build_runner build --delete-conflicting-outputs`
-10. `doc/new_feature/README.md`'deki checklist'i takip ederek ozellik eklemeye basla
+| File | Location | Topic |
+|------|----------|-------|
+| `CACHE_GUIDE.md` | `lib/product/cache/` | Cache system usage guide |
+| `THEME.md` | `lib/product/theme/` | Theme system documentation |
+| `ONBOARDING.md` | `lib/feature/login_process/onboarding/` | Onboarding module |
 
-## Lint
+---
 
-`very_good_analysis` kullanilir. Generated dosyalar (`*.g.dart`, `*.freezed.dart`) analiz disinda tutulur.
+## New Project Setup (Customization)
+
+After post-clone setup (`setup_after_clone.md`) is complete:
+
+1. Change `name` field in `pubspec.yaml`
+2. Update package name across the project (`akillisletme` → new name)
+3. Update strings in `assets/translations/`
+4. Fill store URLs in `AppString`
+5. Change or customize the animation text in `home_background.dart`
+6. Remove unneeded color variants from `app_theme_variant.dart`
+7. Update onboarding step contents
+8. Run `flutter pub get && dart run build_runner build --delete-conflicting-outputs`
+9. Follow the checklist in `doc/new_feature/README.md` to start adding features
+
+---
+
+## Setup Commands (Reference)
 
 ```bash
+# Dependencies
+flutter pub get
+
+# Code-gen (Freezed, GoRouter, Hive, FlutterGen)
+dart run build_runner build --delete-conflicting-outputs
+
+# EasyLocalization key generation
+flutter pub run easy_localization:generate -O lib/product/init/language -f keys -o locale_keys.g.dart --source-dir assets/translations
+
+# Error analysis
 flutter analyze
 ```

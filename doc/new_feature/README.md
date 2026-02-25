@@ -49,8 +49,8 @@ When adding a new feature:
 - [ ] Constants -> `product/const/`
 - [ ] Service needs: check locator, add if necessary ([service_rules.md](service_rules.md) + [service_initialization.md](service_initialization.md))
 - [ ] If new service requires init -> add to `_initializeServices()` in locator
-- [ ] Basit veri cache? -> `SharedCache` + `SharedKeys` ([data_storage.md](data_storage.md))
-- [ ] Model/liste cache? -> `ProductCache` + Hive model ([data_storage.md](data_storage.md) + `CACHE_GUIDE.md`)
+- [ ] Simple data cache? -> `SharedCache` + `SharedKeys` ([data_storage.md](data_storage.md))
+- [ ] Model/list cache? -> `ProductCache` + Hive model ([data_storage.md](data_storage.md) + `CACHE_GUIDE.md`)
 - [ ] Add strings to `AppString` ([route_and_strings.md](route_and_strings.md))
 - [ ] Add route to `app_router.dart` as TypedGoRoute + run build_runner ([route_and_strings.md](route_and_strings.md))
 - [ ] Padding/spacing: use `AppPaddings` constants, no hardcoded values ([widget_and_theme.md](widget_and_theme.md))
